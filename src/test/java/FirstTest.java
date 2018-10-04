@@ -1,3 +1,4 @@
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,12 +32,6 @@ public class FirstTest {
         driver.get("http://newtours.demoaut.com/");
     }
 
-
-//    @AfterClass
-//    public static void tearDown() {
-//        driver.quit();
-//    }
-
     @Test
     public void generalTest() {
         checkCurrentPage(WelcomePage.PAGE_NAME, WelcomePage.TITLE);
@@ -55,8 +50,11 @@ public class FirstTest {
         checkFlightConfirmationPage();
 
         checkCurrentPage(WelcomePage.PAGE_NAME, WelcomePage.TITLE);
+    }
 
-        Assert.assertTrue(true);
+    @AfterClass
+    public static void tearDown() {
+        driver.quit();
     }
 
     private void setWelcomePage() {
