@@ -19,25 +19,25 @@ public class WelcomePage extends Page {
     @FindBy(xpath = "//input [@type='image' and @name='login']")
     private WebElement signInImage;
 
-    public WelcomePage(WebDriver driver) {
+    public WelcomePage(final WebDriver driver) {
         super(driver);
     }
 
-    public void singIn(String login, String password) {
+    public void singIn(final String login, final String password) {
         inputLogin("tutorial");
         inputPassword("tutorial");
         clickSignInImage();
     }
 
-    private void inputLogin(String login) {
+    public void inputLogin(final String login) {
         loginField.sendKeys(login);
     }
 
-    private void inputPassword(String password) {
+    public void inputPassword(final String password) {
         passwordField.sendKeys(password);
     }
 
-    private void clickSignInImage() {
+    public void clickSignInImage() {
         signInImage.click();
     }
 
@@ -45,7 +45,7 @@ public class WelcomePage extends Page {
         if (FlightFinderPage.TITLE.equals(this.driver.getTitle())) {
             return new FlightFinderPage(this.driver);
         } else {
-            throw new IllegalArgumentException("WebDriver is not correspond page "+ FlightFinderPage.PAGE_NAME);
+            throw new IllegalArgumentException("WebDriver is not correspond page " + FlightFinderPage.PAGE_NAME);
         }
     }
 

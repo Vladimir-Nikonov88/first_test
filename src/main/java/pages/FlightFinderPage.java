@@ -11,8 +11,6 @@ public class FlightFinderPage extends Page{
     public static final String PAGE_NAME = "FLIGHT FINDER";
     public static final String TITLE = "Find a Flight: Mercury Tours:";
 
-    private int countPassengers;
-
     public enum Type {
         Round_Trip,
         One_Way
@@ -54,15 +52,11 @@ public class FlightFinderPage extends Page{
     @FindBy(xpath = "//input [@name = 'findFlights']")
     private WebElement imageContinue;
 
-    public FlightFinderPage(WebDriver driver) {
+    public FlightFinderPage(final WebDriver driver) {
         super(driver);
     }
 
-    public int getCountPassengers() {
-        return countPassengers;
-    }
-
-    public void setType (Type type) {
+    public void setType(final Type type) {
         String xpath;
         switch (type) {
             case Round_Trip:
@@ -78,37 +72,36 @@ public class FlightFinderPage extends Page{
         radioButton.click();
     }
 
-    public void setPassengers (int count) {
+    public void setPassengers(final int count) {
         Select selectPassengers = new Select(selectElementPassengers);
         selectPassengers.selectByValue(String.valueOf(count));
-        this.countPassengers = count;
     }
 
-    public void setDepartingFrom (String city) {
+    public void setDepartingFrom(final String city) {
         Select selectPassengers = new Select(selectDepartingFrom);
         selectPassengers.selectByValue(city);
     }
 
-    public void setOn (String month, String day) {
+    public void setOn(final String month, final String day) {
         Select selectOnMonths = new Select(selectOnMonth);
         Select selectOnDays = new Select(selectOnDay);
         selectOnMonths.selectByVisibleText(month);
         selectOnDays.selectByValue(day);
     }
 
-    public void setArrivingIn (String city) {
+    public void setArrivingIn(final String city) {
         Select selectArriving = new Select(selectArrivingIn);
         selectArriving.selectByValue(city);
     }
 
-    public void setReturning (String month, String day) {
+    public void setReturning(final String month, final String day) {
         Select selectToMonths = new Select(selectReturningToMonth);
         Select selectToDays = new Select(selectReturningToDay);
         selectToMonths.selectByVisibleText(month);
         selectToDays.selectByValue(day);
     }
 
-    public void setServiceClass (ServiceClass serviceClass) {
+    public void setServiceClass(final ServiceClass serviceClass) {
         String xpath;
         switch (serviceClass) {
             case EconomyClass:
@@ -127,21 +120,13 @@ public class FlightFinderPage extends Page{
         radioButton.click();
     }
 
-    public void setAirline (String airline) {
+    public void setAirline(final String airline) {
         Select selectAirlines = new Select(selectAirline);
         selectAirlines.selectByVisibleText(airline);
     }
 
     public void clickContinueImage() {
         imageContinue.click();
-    }
-
-    public SelectFlightPage initSelectFlightPage() {
-        if (SelectFlightPage.TITLE.equals(this.driver.getTitle())) {
-            return new SelectFlightPage(this.driver);
-        } else {
-            throw new IllegalArgumentException("WebDriver is not correspond page "+ SelectFlightPage.PAGE_NAME);
-        }
     }
 
 }
