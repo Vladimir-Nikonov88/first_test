@@ -1,3 +1,4 @@
+import jdbc.JDBC;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,7 +24,6 @@ import java.util.logging.Logger;
  * The class was created for test my first test.
  */
 public class FirstTest {
-
     public static final String LOGIN = "tutorial";
     public static final String PASSWORD = "tutorial";
     public static final int TIMEOUT = 10;
@@ -31,6 +31,7 @@ public class FirstTest {
     public static final int PRICE_RETURN = 273;
     public static final int TOTAL_PRICE = 1199;
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
+    private static JDBC jdbc;
     private static WebDriver driver;
     private static WelcomeStep welcomeStep;
     private static FlightFinderStep flightFinderStep;
@@ -44,6 +45,7 @@ public class FirstTest {
         System.setProperty("java.util.logging.config.file",
                 "src/main/resources/logging.properties");
         System.setProperty("webdriver.chrome.driver", "C:\\selenium\\chromedriver.exe");
+        jdbc = new JDBC();
         driver = new ChromeDriver();
         welcomeStep = new WelcomeStep(driver);
         flightFinderStep = new FlightFinderStep(driver);
@@ -82,7 +84,7 @@ public class FirstTest {
     }
 
     private void setWelcomePage() {
-        welcomeStep.inputLogin(LOGIN);
+        welcomeStep.inputLogin(jdbc.executeValue("login"));
         welcomeStep.inputPassword(PASSWORD);
         welcomeStep.clickSignInImage();
     }
