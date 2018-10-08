@@ -41,12 +41,4 @@ public class WelcomePage extends Page {
         signInImage.click();
     }
 
-    public FlightFinderPage initFlightFinderPage() {
-        if (FlightFinderPage.TITLE.equals(this.driver.getTitle())) {
-            return new FlightFinderPage(this.driver);
-        } else {
-            throw new IllegalArgumentException("WebDriver is not correspond page " + FlightFinderPage.PAGE_NAME);
-        }
-    }
-
 }

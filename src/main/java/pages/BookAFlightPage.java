@@ -173,15 +173,4 @@ public class BookAFlightPage extends Page {
         buttonSecurePurchase.click();
     }
 
-    public FlightConfirmationPage initFlightConfirmationPage() {
-        if (FlightConfirmationPage.TITLE.equals(this.driver.getTitle())) {
-            return new FlightConfirmationPage(this.driver);
-        } else {
-            throw new IllegalArgumentException("WebDriver is not correspond page "+ FlightFinderPage.PAGE_NAME);
-        }
-    }
-
-
-
-
 }

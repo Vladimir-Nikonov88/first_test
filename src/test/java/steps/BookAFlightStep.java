@@ -153,6 +153,7 @@ public class BookAFlightStep {
                            final String postalCode, final String country, final AddressType addressType) {
         log.info(String.format("Set %s Address (address: %s, city: %s, State/Province: %s, Postal Code: %s, country: %s)",
                 addressType, address, city, stateProvince, postalCode, country));
+        bookAFlightPage.setAddress(checkBox, address, city, stateProvince, postalCode, country, addressType);
         switch (addressType) {
             case Billing:
                 this.billedToAddress = address;
