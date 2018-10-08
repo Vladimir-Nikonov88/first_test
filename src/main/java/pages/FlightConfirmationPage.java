@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class FlightConfirmationPage extends Page {
 
     public static final String PAGE_NAME = "FLIGHT CONFIRMATION";
@@ -44,21 +42,22 @@ public class FlightConfirmationPage extends Page {
 
     public String getDateDepart() {
         String[] listOfDepartElenets = fontDepartingEl.getText().split("\n");
-        return listOfDepartElenets[1].replaceAll(" @.*","");
+        return listOfDepartElenets[1].replaceAll(" @.*", "");
     }
 
     public String getFlightDepart() {
         String[] listOfDepartElenets = fontDepartingEl.getText().split("\n");
-        return listOfDepartElenets[1].replaceAll(".*w\\/ ","");
+        return listOfDepartElenets[1].replaceAll(".*w\\/ ", "");
     }
 
     public String getClassDepart() {
         String[] listOfDepartElenets = fontDepartingEl.getText().split("\n");
         return listOfDepartElenets[2];
     }
+
     public int getPriceDepart() {
         String[] listOfDepartElenets = fontDepartingEl.getText().split("\n");
-        return Integer.parseInt(listOfDepartElenets[3].replaceAll("[\\D]",""));
+        return Integer.parseInt(listOfDepartElenets[3].replaceAll("[\\D]", ""));
     }
 
     public String getWayReturn() {
@@ -68,12 +67,12 @@ public class FlightConfirmationPage extends Page {
 
     public String getDateReturn() {
         String[] listOfReturnElenets = fontReturningEl.getText().split("\n");
-        return listOfReturnElenets[1].replaceAll(" @.*","");
+        return listOfReturnElenets[1].replaceAll(" @.*", "");
     }
 
     public String getFlightReturn() {
         String[] listOfReturnElenets = fontReturningEl.getText().split("\n");
-        return listOfReturnElenets[1].replaceAll(".*w\\/ ","");
+        return listOfReturnElenets[1].replaceAll(".*w\\/ ", "");
     }
 
     public String getClassReturn() {
@@ -83,19 +82,19 @@ public class FlightConfirmationPage extends Page {
 
     public int getPriceReturn() {
         String[] listOfReturnElenets = fontReturningEl.getText().split("\n");
-        return Integer.parseInt(listOfReturnElenets[3].replaceAll("[\\D]",""));
+        return Integer.parseInt(listOfReturnElenets[3].replaceAll("[\\D]", ""));
     }
 
     public int getCountPassengers() {
-        return Integer.parseInt(fontPassengersEl.getText().replaceAll("[\\D]",""));
+        return Integer.parseInt(fontPassengersEl.getText().replaceAll("[\\D]", ""));
     }
 
     public int getTaxes() {
-        return Integer.parseInt(fontTaxesEl.getText().replaceAll("[\\D]",""));
+        return Integer.parseInt(fontTaxesEl.getText().replaceAll("[\\D]", ""));
     }
 
     public int getTotalPrice() {
-        return Integer.parseInt(fontTotalPriceEl.getText().replaceAll("[\\D]",""));
+        return Integer.parseInt(fontTotalPriceEl.getText().replaceAll("[\\D]", ""));
     }
 
     public String getBilledToFullName() {

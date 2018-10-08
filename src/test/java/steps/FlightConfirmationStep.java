@@ -130,7 +130,7 @@ public class FlightConfirmationStep {
         flightConfirmationPage.clickButtonBackToHome();
     }
 
-    public void initFields(){
+    public void initFields() {
         this.wayDepart = flightConfirmationPage.getWayDepart();
         this.dateDepart = flightConfirmationPage.getDateDepart();
         this.flightDepart = flightConfirmationPage.getFlightDepart();

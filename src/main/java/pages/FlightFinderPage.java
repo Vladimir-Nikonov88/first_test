@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class FlightFinderPage extends Page{
+public class FlightFinderPage extends Page {
 
     public static final String PAGE_NAME = "FLIGHT FINDER";
     public static final String TITLE = "Find a Flight: Mercury Tours:";
@@ -65,8 +65,8 @@ public class FlightFinderPage extends Page{
             case One_Way:
                 xpath = "//input [@name = 'tripType' and @value = 'oneway']";
                 break;
-                default:
-                    throw new IllegalArgumentException();
+            default:
+                throw new IllegalArgumentException();
         }
         WebElement radioButton = driver.findElement(By.xpath(xpath));
         radioButton.click();

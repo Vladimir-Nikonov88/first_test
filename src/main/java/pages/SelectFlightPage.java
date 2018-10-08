@@ -33,6 +33,7 @@ public class SelectFlightPage extends Page {
     public String getWayDepart() {
         return wayDepartFontEl.getText();
     }
+
     public String getDateDepart() {
         return dateDepartFontEl.getText();
     }
@@ -45,13 +46,13 @@ public class SelectFlightPage extends Page {
         return dateReturnFontEl.getText();
     }
 
-    public void setDepartFlight(final String flight){
+    public void setDepartFlight(final String flight) {
         String xpath = getXPathDepartFlight(flight);
         WebElement departFlightUnifiedAirlines = driver.findElement(By.xpath(xpath));
         departFlightUnifiedAirlines.click();
     }
 
-    public void setReturnFlight(final String flight){
+    public void setReturnFlight(final String flight) {
         String xpath = getXPathReturnFlight(flight);
         WebElement returnFlightUnifiedAirlines = driver.findElement(By.xpath(xpath));
         returnFlightUnifiedAirlines.click();
@@ -68,6 +69,7 @@ public class SelectFlightPage extends Page {
         price = price.replace("Price: $", "");
         return Integer.parseInt(price);
     }
+
     public int getPriceReturnFlight(final String flight) {
         String xpathFlight = getXPathReturnFlight(flight);
         WebElement elementAirlanesPrice = driver.findElement(By.xpath(xpathFlight + "/parent::*/parent::*/following-sibling::*//b"));

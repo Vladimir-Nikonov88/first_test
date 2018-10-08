@@ -14,9 +14,4 @@ public abstract class Page {
         this.driver = driver;
     }
 
-//    private void getTitle(){
-//        WebElement title = driver.findElement(By.xpath("//title"));
-//        TITLE = title.getText();
-//    }
-
 }

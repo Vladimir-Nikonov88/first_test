@@ -21,6 +21,9 @@ import java.util.logging.Logger;
 
 public class FirstTest {
 
+    public static final String LOGIN = "tutorial";
+    public static final String PASSWORD = "tutorial";
+    public static final int TIMEOUT = 10;
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
     private static WebDriver driver;
     private static WelcomeStep welcomeStep;
@@ -42,7 +45,7 @@ public class FirstTest {
         bookAFlightStep = new BookAFlightStep(driver);
         flightConfirmationStep = new FlightConfirmationStep(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         //   http://newtours.demoaut.com/
         driver.get("http://newtours.demoaut.com/");
     }
@@ -73,8 +76,8 @@ public class FirstTest {
     }
 
     private void setWelcomePage() {
-        welcomeStep.inputLogin("tutorial");
-        welcomeStep.inputPassword("tutorial");
+        welcomeStep.inputLogin(LOGIN);
+        welcomeStep.inputPassword(PASSWORD);
         welcomeStep.clickSignInImage();
     }
 
@@ -99,12 +102,30 @@ public class FirstTest {
     }
 
     private void checkValueSelectFlightPage() {
-        checkValuePage(SelectFlightPage.PAGE_NAME, "wayDepart", "Paris to Seattle", selectFlightStep.getWayDepart());
-        checkValuePage(SelectFlightPage.PAGE_NAME, "dateDepart", "11/20/2018", selectFlightStep.getDateDepart());
-        checkValuePage(SelectFlightPage.PAGE_NAME, "priceDepart", 281, selectFlightStep.getPriceDepart());
-        checkValuePage(SelectFlightPage.PAGE_NAME, "wayReturn", "Seattle to Paris", selectFlightStep.getWayReturn());
-        checkValuePage(SelectFlightPage.PAGE_NAME, "dateReturn", "12/19/2018", selectFlightStep.getDateReturn());
-        checkValuePage(SelectFlightPage.PAGE_NAME, "priceDepart", 273, selectFlightStep.getPriceReturn());
+        checkValuePage(SelectFlightPage.PAGE_NAME,
+                "wayDepart",
+                "Paris to Seattle",
+                selectFlightStep.getWayDepart());
+        checkValuePage(SelectFlightPage.PAGE_NAME,
+                "dateDepart",
+                "11/20/2018",
+                selectFlightStep.getDateDepart());
+        checkValuePage(SelectFlightPage.PAGE_NAME,
+                "priceDepart",
+                281,
+                selectFlightStep.getPriceDepart());
+        checkValuePage(SelectFlightPage.PAGE_NAME,
+                "wayReturn",
+                "Seattle to Paris",
+                selectFlightStep.getWayReturn());
+        checkValuePage(SelectFlightPage.PAGE_NAME,
+                "dateReturn",
+                "12/19/2018",
+                selectFlightStep.getDateReturn());
+        checkValuePage(SelectFlightPage.PAGE_NAME,
+                "priceDepart",
+                273,
+                selectFlightStep.getPriceReturn());
     }
 
     private void testBookAFlightPage() {
@@ -115,36 +136,92 @@ public class FirstTest {
     }
 
     private void checkValueBookAFlightPage() {
-        int totalPrice = (bookAFlightStep.getPriceDepart() + bookAFlightStep.getPriceReturn()) *
-                bookAFlightStep.getPassengers() + bookAFlightStep.getTaxes();
-        checkValuePage(BookAFlightPage.PAGE_NAME, "wayDepart", "Paris to Seattle", bookAFlightStep.getWayDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "dateDepart", "11/20/2018", bookAFlightStep.getDateDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "flightDepart", "Unified Airlines 363", bookAFlightStep.getFlightDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "classDepart", "Business", bookAFlightStep.getClassDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "priceDepart", 281, bookAFlightStep.getPriceDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "wayReturn", "Seattle to Paris", bookAFlightStep.getWayReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "dateReturn", "12/19/2018", bookAFlightStep.getDateReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "flightReturn", "Blue Skies Airlines 631", bookAFlightStep.getFlightReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "classReturn", "Business", bookAFlightStep.getClassReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "priceReturn", 273, bookAFlightStep.getPriceReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "totalPrice", 1199, bookAFlightStep.getTotalPrice());
-        checkValuePage(BookAFlightPage.PAGE_NAME, "totalPrice", 1199, totalPrice);
+        int totalPrice = (bookAFlightStep.getPriceDepart() + bookAFlightStep.getPriceReturn())
+                * bookAFlightStep.getPassengers() + bookAFlightStep.getTaxes();
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "wayDepart",
+                "Paris to Seattle",
+                bookAFlightStep.getWayDepart());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "dateDepart",
+                "11/20/2018",
+                bookAFlightStep.getDateDepart());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "flightDepart",
+                "Unified Airlines 363",
+                bookAFlightStep.getFlightDepart());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "classDepart",
+                "Business",
+                bookAFlightStep.getClassDepart());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "priceDepart",
+                281,
+                bookAFlightStep.getPriceDepart());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "wayReturn",
+                "Seattle to Paris",
+                bookAFlightStep.getWayReturn());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "dateReturn",
+                "12/19/2018",
+                bookAFlightStep.getDateReturn());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "flightReturn",
+                "Blue Skies Airlines 631",
+                bookAFlightStep.getFlightReturn());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "classReturn",
+                "Business",
+                bookAFlightStep.getClassReturn());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "priceReturn",
+                273,
+                bookAFlightStep.getPriceReturn());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "totalPrice",
+                1199,
+                bookAFlightStep.getTotalPrice());
+        checkValuePage(BookAFlightPage.PAGE_NAME,
+                "totalPrice",
+                1199,
+                totalPrice);
 
     }
-
     private void setValueBookAFlightPage() {
         log.info("\nSet Value BookAFlightPage");
-        bookAFlightStep.setPassengers(1, "Ivanov", "Ivan", "Hindu");
-        bookAFlightStep.setPassengers(2, "Ivanova", "Irina", "Bland");
+        bookAFlightStep.setPassengers(1,
+                "Ivanov",
+                "Ivan",
+                "Hindu");
+        bookAFlightStep.setPassengers(2,
+                "Ivanova",
+                "Irina",
+                "Bland");
 
-        bookAFlightStep.setCreditCard("Visa", "5479540454132487", "05", "2009",
-                "Ivan", "Ivanovich", "Ivanov");
+        bookAFlightStep.setCreditCard("Visa",
+                "5479540454132487",
+                "05",
+                "2009",
+                "Ivan",
+                "Ivanovich",
+                "Ivanov");
 
-        bookAFlightStep.setAddress(false, "1085 Borregas Ave.", "Albuquerque", "New Mexico",
-                "94089", "UNITED STATES", BookAFlightPage.AddressType.Billing);
+        bookAFlightStep.setAddress(false,
+                "1085 Borregas Ave.",
+                "Albuquerque",
+                "New Mexico",
+                "94089",
+                "UNITED STATES",
+                BookAFlightPage.AddressType.Billing);
 
-        bookAFlightStep.setAddress(true, "1225 Borregas Ave.", "Boston", "Massachusetts",
-                "91089", "UNITED STATES", BookAFlightPage.AddressType.Delivery);
+        bookAFlightStep.setAddress(true,
+                "1225 Borregas Ave.",
+                "Boston",
+                "Massachusetts",
+                "91089",
+                "UNITED STATES",
+                BookAFlightPage.AddressType.Delivery);
     }
 
     private void testFlightConfirmationPage() {
@@ -160,45 +237,96 @@ public class FirstTest {
 
     private void checkDepartFlightConfirmationPage() {
         log.info("\nCheckDepart");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "wayDepart", selectFlightStep.getWayDepart(), flightConfirmationStep.getWayDepart());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "dateDepart", selectFlightStep.getDateDepart(), flightConfirmationStep.getDateDepart());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "flightDepart", selectFlightStep.getFlightDepart(), flightConfirmationStep.getFlightDepart());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "wayDepart",
+                selectFlightStep.getWayDepart(),
+                flightConfirmationStep.getWayDepart());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "dateDepart",
+                selectFlightStep.getDateDepart(),
+                flightConfirmationStep.getDateDepart());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "flightDepart",
+                selectFlightStep.getFlightDepart(),
+                flightConfirmationStep.getFlightDepart());
     }
 
     private void checkReturnFlightConfirmationPage() {
         log.info("\nCheckReturn");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "wayReturn", selectFlightStep.getWayReturn(), flightConfirmationStep.getWayReturn());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "dateReturn", selectFlightStep.getDateReturn(), flightConfirmationStep.getDateReturn());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "flightReturn", selectFlightStep.getFlightReturn(), flightConfirmationStep.getFlightReturn());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "wayReturn",
+                selectFlightStep.getWayReturn(),
+                flightConfirmationStep.getWayReturn());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "dateReturn",
+                selectFlightStep.getDateReturn(),
+                flightConfirmationStep.getDateReturn());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "flightReturn",
+                selectFlightStep.getFlightReturn(),
+                flightConfirmationStep.getFlightReturn());
     }
 
     private void checkCountPassengersFlightConfirmationPage() {
         log.info("\nCheckCountPassengers");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "countPassengers", flightFinderStep.getCountPassengers(), flightConfirmationStep.getCountPassengers());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "countPassengers",
+                flightFinderStep.getCountPassengers(),
+                flightConfirmationStep.getCountPassengers());
     }
 
     private void checkBilledToFlightConfirmationPage() {
         log.info("\nCheckBilledTo");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "billedToFullName", bookAFlightStep.getBilledToFullName(), flightConfirmationStep.getBilledToFullName());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "billedToAddress", bookAFlightStep.getBilledToAddress(), flightConfirmationStep.getBilledToAddress());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "billedToCity", bookAFlightStep.getBilledToCity(), flightConfirmationStep.getBilledToCity());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "billedToStateProvince", bookAFlightStep.getBilledToStateProvince(), flightConfirmationStep.getBilledToStateProvince());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "billedToStatePostalCode()", bookAFlightStep.getBilledToPostalCode(), flightConfirmationStep.getBilledToPostalCode());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "billedToFullName",
+                bookAFlightStep.getBilledToFullName(),
+                flightConfirmationStep.getBilledToFullName());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "billedToAddress",
+                bookAFlightStep.getBilledToAddress(),
+                flightConfirmationStep.getBilledToAddress());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "billedToCity",
+                bookAFlightStep.getBilledToCity(),
+                flightConfirmationStep.getBilledToCity());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "billedToStateProvince",
+                bookAFlightStep.getBilledToStateProvince(),
+                flightConfirmationStep.getBilledToStateProvince());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "billedToStatePostalCode()",
+                bookAFlightStep.getBilledToPostalCode(),
+                flightConfirmationStep.getBilledToPostalCode());
     }
 
     private void checkDeliveryFlightConfirmationPage() {
         log.info("\nCheckDelivery");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "deliveryAddress", bookAFlightStep.getDeliveryAddress(), flightConfirmationStep.getDeliveryAddress());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "deliveryCity", bookAFlightStep.getDeliveryCity(), flightConfirmationStep.getDeliveryCity());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "deliveryStateProvince", bookAFlightStep.getDeliveryStateProvince(), flightConfirmationStep.getDeliveryStateProvince());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "deliveryStatePostalCode", bookAFlightStep.getDeliveryPostalCode(), flightConfirmationStep.getDeliveryPostalCode());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "deliveryAddress",
+                bookAFlightStep.getDeliveryAddress(),
+                flightConfirmationStep.getDeliveryAddress());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "deliveryCity",
+                bookAFlightStep.getDeliveryCity(),
+                flightConfirmationStep.getDeliveryCity());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "deliveryStateProvince",
+                bookAFlightStep.getDeliveryStateProvince(),
+                flightConfirmationStep.getDeliveryStateProvince());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "deliveryStatePostalCode",
+                bookAFlightStep.getDeliveryPostalCode(),
+                flightConfirmationStep.getDeliveryPostalCode());
     }
 
     private void checkTotalPriceFlightConfirmationPage() {
         log.info("\nCheckTotalPrice");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME, "totalPrice", bookAFlightStep.getTotalPrice(),
-                (flightConfirmationStep.getPriceDepart() + flightConfirmationStep.getPriceReturn()) * flightConfirmationStep.getCountPassengers() +
-                        flightConfirmationStep.getTaxes());
+        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+                "totalPrice",
+                bookAFlightStep.getTotalPrice(),
+                (flightConfirmationStep.getPriceDepart() + flightConfirmationStep.getPriceReturn())
+                        * flightConfirmationStep.getCountPassengers()
+                        + flightConfirmationStep.getTaxes());
     }
 
     private void checkCurrentPage(final String namePage, final String nameTitle) {
@@ -210,7 +338,10 @@ public class FirstTest {
         }
     }
 
-    private void checkValuePage(final String namePage, final String nameVariable, final Object expected, final Object actual) {
+    private void checkValuePage(final String namePage,
+                                final String nameVariable,
+                                final Object expected,
+                                final Object actual) {
         String mark = "";
         if (expected instanceof String && actual instanceof String) {
             mark = "%s";
@@ -220,9 +351,11 @@ public class FirstTest {
             throw new IllegalArgumentException();
         }
         if (expected.equals(actual)) {
-            log.info(String.format("CORRECT value Page: %s, name: %s \texpected = " + mark + ", actual = " + mark, namePage, nameVariable, expected, actual));
+            log.info(String.format("CORRECT value Page: %s, name: %s \texpected = " + mark + ", actual = "
+                    + mark, namePage, nameVariable, expected, actual));
         } else {
-            log.info(String.format("INCORRECT!!! value Page: %s, name: %s \texpected = " + mark + ", actual = " + mark, namePage, nameVariable, expected, actual));
+            log.info(String.format("INCORRECT!!! value Page: %s, name: %s \texpected = " + mark + ", actual = "
+                    + mark, namePage, nameVariable, expected, actual));
             Assert.fail();
         }
     }

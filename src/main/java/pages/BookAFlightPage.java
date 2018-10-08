@@ -13,7 +13,7 @@ public class BookAFlightPage extends Page {
     public static final String PAGE_NAME = "BOOK A FLIGHT";
     public static final String TITLE = "Book a Flight: Mercury Tours";
 
-    public enum AddressType { Billing, Delivery }
+    public enum AddressType {Billing, Delivery}
 
     //Summary
 
@@ -49,41 +49,53 @@ public class BookAFlightPage extends Page {
     public String getWayDepart() {
         return listOfWayDatDepart.get(0).getText();
     }
+
     public String getDateDepart() {
         return listOfWayDatDepart.get(1).getText();
     }
+
     public String getFlightDepart() {
         return listOfFlightInfoDepart.get(0).getText();
     }
+
     public String getClassDepart() {
         return listOfFlightInfoDepart.get(1).getText();
     }
+
     public int getPriceDepart() {
         return Integer.parseInt(listOfFlightInfoDepart.get(2).getText());
     }
+
     public String getWayReturn() {
         return listOfWayDateReturn.get(0).getText();
     }
+
     public String getDateReturn() {
         return listOfWayDateReturn.get(1).getText();
     }
+
     public String getFlightReturn() {
         return listOfFlightInfoReturn.get(2).getText();
     }
+
     public String getClassReturn() {
         return listOfFlightInfoReturn.get(4).getText();
     }
+
     public int getPriceReturn() {
         return Integer.parseInt(listOfFlightInfoReturn.get(5).getText());
     }
+
     public int getPassengers() {
         return Integer.parseInt(passengersElem.getText());
     }
+
     public int getTaxes() {
-        return Integer.parseInt(taxesElem.getText().replace("$",""));
+        return Integer.parseInt(taxesElem.getText().replace("$", ""));
     }
+
     public int getTotalPrice() {
-        return Integer.parseInt(totalPriceElem.getText().replace("$",""));
+        return Integer.parseInt(totalPriceElem.getText().replace("$", ""));
     }
 
 
@@ -139,8 +151,8 @@ public class BookAFlightPage extends Page {
                 type = "del";
                 positionCheckBox = 2;
                 break;
-                default:
-                    throw new IllegalArgumentException("Unknown addressType");
+            default:
+                throw new IllegalArgumentException("Unknown addressType");
         }
         WebElement inputCheckBox = driver.findElement(By.xpath("(//input[@name = 'ticketLess'])[" + positionCheckBox + "]"));
         WebElement inputAddress = driver.findElement(By.xpath("//input[@name = '" + type + "Address1']"));

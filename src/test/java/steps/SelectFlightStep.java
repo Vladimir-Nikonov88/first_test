@@ -55,14 +55,14 @@ public class SelectFlightStep {
         return priceReturn;
     }
 
-    public void setDepartFlight(final String flight){
+    public void setDepartFlight(final String flight) {
         log.info("Set Depart Flight: " + flight);
         selectFlightPage.setDepartFlight(flight);
         this.flightDepart = flight;
         this.priceDepart = selectFlightPage.getPriceDepartFlight(flight);
     }
 
-    public void setReturnFlight(final String flight){
+    public void setReturnFlight(final String flight) {
         log.info("Set Return Flight: " + flight);
         selectFlightPage.setReturnFlight(flight);
         this.flightReturn = flight;

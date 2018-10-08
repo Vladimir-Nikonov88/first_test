@@ -141,8 +141,8 @@ public class BookAFlightStep {
     public void setCreditCard(final String type, final String number, final String month, final String year,
                               final String firstName, final String middleName, final String lastName) {
 
-        log.info(String.format("Set Credit Card Info (type: %s, number: %s, month: %s, year: %s, " +
-                "first name: %s, middle name: %s, last name: %s)",
+        log.info(String.format("Set Credit Card Info (type: %s, number: %s, month: %s, year: %s, "
+                + "first name: %s, middle name: %s, last name: %s)",
                 type, number, month, year, firstName, middleName, lastName));
 
         bookAFlightPage.setCreditCard(type, number, month, year, firstName, middleName, lastName);
@@ -151,7 +151,8 @@ public class BookAFlightStep {
 
     public void setAddress(final boolean checkBox, final String address, final String city, final String stateProvince,
                            final String postalCode, final String country, final AddressType addressType) {
-        log.info(String.format("Set %s Address (address: %s, city: %s, State/Province: %s, Postal Code: %s, country: %s)",
+        log.info(String.format("Set %s Address (address: %s, city: %s, State/Province: %s, Postal Code: %s,"
+                        + " country: %s)",
                 addressType, address, city, stateProvince, postalCode, country));
         bookAFlightPage.setAddress(checkBox, address, city, stateProvince, postalCode, country, addressType);
         switch (addressType) {
