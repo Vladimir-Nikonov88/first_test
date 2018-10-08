@@ -5,6 +5,9 @@ import pages.FlightConfirmationPage;
 
 import java.util.logging.Logger;
 
+/**
+ * Class.
+ */
 public class FlightConfirmationStep {
 
     private static Logger log = Logger.getLogger(BookAFlightStep.class.getName());
@@ -37,99 +40,171 @@ public class FlightConfirmationStep {
         this.flightConfirmationPage = new FlightConfirmationPage(driver);
     }
 
+    /**
+     *Method.
+     */
     public String getWayDepart() {
         return wayDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getDateDepart() {
         return dateDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getFlightDepart() {
         return flightDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getClassDepart() {
         return classDepart;
     }
 
+    /**
+     *Method.
+     */
     public int getPriceDepart() {
         return priceDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getWayReturn() {
         return wayReturn;
     }
 
+    /**
+     *Method.
+     */
     public String getDateReturn() {
         return dateReturn;
     }
 
+    /**
+     *Method.
+     */
     public String getFlightReturn() {
         return flightReturn;
     }
 
+    /**
+     *Method.
+     */
     public String getClassReturn() {
         return classReturn;
     }
 
+    /**
+     *Method.
+     */
     public int getPriceReturn() {
         return priceReturn;
     }
 
+    /**
+     *Method.
+     */
     public int getCountPassengers() {
         return countPassengers;
     }
 
+    /**
+     *Method.
+     */
     public int getTaxes() {
         return taxes;
     }
 
+    /**
+     *Method.
+     */
     public int getTotalPrice() {
         return totalPrice;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToFullName() {
         return billedToFullName;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToAddress() {
         return billedToAddress;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToCity() {
         return billedToCity;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToStateProvince() {
         return billedToStateProvince;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToPostalCode() {
         return billedToPostalCode;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryAddress() {
         return deliveryAddress;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryCity() {
         return deliveryCity;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryStateProvince() {
         return deliveryStateProvince;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryPostalCode() {
         return deliveryPostalCode;
     }
 
+    /**
+     *Method.
+     */
     public void clickButtonBackToHome() {
         log.info("Click Back To Home Button");
         flightConfirmationPage.clickButtonBackToHome();
     }
 
+    /**
+     *Method.
+     */
     public void initFields() {
         this.wayDepart = flightConfirmationPage.getWayDepart();
         this.dateDepart = flightConfirmationPage.getDateDepart();

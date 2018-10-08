@@ -19,11 +19,17 @@ import steps.WelcomeStep;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+/**
+ * The class was created for test my first test.
+ */
 public class FirstTest {
 
     public static final String LOGIN = "tutorial";
     public static final String PASSWORD = "tutorial";
     public static final int TIMEOUT = 10;
+    public static final int PRICE_DEPART = 281;
+    public static final int PRICE_RETURN = 273;
+    public static final int TOTAL_PRICE = 1199;
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
     private static WebDriver driver;
     private static WelcomeStep welcomeStep;
@@ -111,10 +117,6 @@ public class FirstTest {
                 "11/20/2018",
                 selectFlightStep.getDateDepart());
         checkValuePage(SelectFlightPage.PAGE_NAME,
-                "priceDepart",
-                281,
-                selectFlightStep.getPriceDepart());
-        checkValuePage(SelectFlightPage.PAGE_NAME,
                 "wayReturn",
                 "Seattle to Paris",
                 selectFlightStep.getWayReturn());
@@ -122,10 +124,6 @@ public class FirstTest {
                 "dateReturn",
                 "12/19/2018",
                 selectFlightStep.getDateReturn());
-        checkValuePage(SelectFlightPage.PAGE_NAME,
-                "priceDepart",
-                273,
-                selectFlightStep.getPriceReturn());
     }
 
     private void testBookAFlightPage() {
@@ -136,8 +134,6 @@ public class FirstTest {
     }
 
     private void checkValueBookAFlightPage() {
-        int totalPrice = (bookAFlightStep.getPriceDepart() + bookAFlightStep.getPriceReturn())
-                * bookAFlightStep.getPassengers() + bookAFlightStep.getTaxes();
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "wayDepart",
                 "Paris to Seattle",
@@ -156,7 +152,7 @@ public class FirstTest {
                 bookAFlightStep.getClassDepart());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "priceDepart",
-                281,
+                PRICE_DEPART,
                 bookAFlightStep.getPriceDepart());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "wayReturn",
@@ -176,15 +172,13 @@ public class FirstTest {
                 bookAFlightStep.getClassReturn());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "priceReturn",
-                273,
+                PRICE_RETURN,
                 bookAFlightStep.getPriceReturn());
+        int totalPrice = (bookAFlightStep.getPriceDepart() + bookAFlightStep.getPriceReturn())
+                * bookAFlightStep.getPassengers() + bookAFlightStep.getTaxes();
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "totalPrice",
-                1199,
-                bookAFlightStep.getTotalPrice());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
-                "totalPrice",
-                1199,
+                TOTAL_PRICE,
                 totalPrice);
 
     }
@@ -332,6 +326,7 @@ public class FirstTest {
     private void checkCurrentPage(final String namePage, final String nameTitle) {
         if (nameTitle.equals(driver.getTitle())) {
             System.out.println("\nNEW PAGE  " + namePage);
+            Assert.assertTrue(true);
         } else {
             System.out.println("FAIL: Current page incorrect");
             Assert.fail();

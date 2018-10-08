@@ -7,6 +7,9 @@ import java.util.logging.Logger;
 
 import static pages.BookAFlightPage.AddressType;
 
+/**
+ * Class.
+ */
 public class BookAFlightStep {
 
     private static Logger log = Logger.getLogger(BookAFlightStep.class.getName());
@@ -43,101 +46,173 @@ public class BookAFlightStep {
         this.bookAFlightPage = new BookAFlightPage(driver);
     }
 
+    /**
+     *Method.
+     */
     public String getWayDepart() {
         return wayDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getDateDepart() {
         return dateDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getFlightDepart() {
         return flightDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getClassDepart() {
         return classDepart;
     }
 
+    /**
+     *Method.
+     */
     public int getPriceDepart() {
         return priceDepart;
     }
 
+    /**
+     *Method.
+     */
     public String getWayReturn() {
         return wayReturn;
     }
 
+    /**
+     *Method.
+     */
     public String getDateReturn() {
         return dateReturn;
     }
 
+    /**
+     *Method.
+     */
     public String getFlightReturn() {
         return flightReturn;
     }
 
+    /**
+     *Method.
+     */
     public String getClassReturn() {
         return classReturn;
     }
 
+    /**
+     *Method.
+     */
     public int getPriceReturn() {
         return priceReturn;
     }
 
+    /**
+     *Method.
+     */
     public int getPassengers() {
         return passengers;
     }
 
+    /**
+     *Method.
+     */
     public int getTaxes() {
         return taxes;
     }
 
+    /**
+     *Method.
+     */
     public int getTotalPrice() {
         return totalPrice;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToFullName() {
         return billedToFullName;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToAddress() {
         return billedToAddress;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToCity() {
         return billedToCity;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToStateProvince() {
         return billedToStateProvince;
     }
 
+    /**
+     *Method.
+     */
     public String getBilledToPostalCode() {
         return billedToPostalCode;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryAddress() {
         return deliveryAddress;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryCity() {
         return deliveryCity;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryStateProvince() {
         return deliveryStateProvince;
     }
 
+    /**
+     *Method.
+     */
     public String getDeliveryPostalCode() {
         return deliveryPostalCode;
     }
 
+    /**
+     *Method.
+     */
     public void setPassengers(final int number, final String firstName, final String lastName, final String meal) {
         log.info(String.format("Set Passenger Info (number: %s, first name: %s, last name: %s, meal: %s)",
                 number, firstName, lastName, meal));
        bookAFlightPage.setPassengers(number, firstName, lastName, meal);
     }
 
-    //Block Credit Card
+
+    /**
+     *Method.
+     */
     public void setCreditCard(final String type, final String number, final String month, final String year,
                               final String firstName, final String middleName, final String lastName) {
 
@@ -149,6 +224,9 @@ public class BookAFlightStep {
         this.billedToFullName = firstName + " " + middleName + " " + lastName;
     }
 
+    /**
+     *Method.
+     */
     public void setAddress(final boolean checkBox, final String address, final String city, final String stateProvince,
                            final String postalCode, final String country, final AddressType addressType) {
         log.info(String.format("Set %s Address (address: %s, city: %s, State/Province: %s, Postal Code: %s,"
@@ -173,11 +251,17 @@ public class BookAFlightStep {
         }
     }
 
+    /**
+     *Method.
+     */
     public void clickSecurePurchaseButton() {
         log.info("Click Secure Purchase Button");
         bookAFlightPage.clickSecurePurchase();
     }
 
+    /**
+     *Method.
+     */
     public void initFields() {
         this.wayDepart = bookAFlightPage.getWayDepart();
         this.dateDepart = bookAFlightPage.getDateDepart();

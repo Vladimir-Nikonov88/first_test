@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Class.
+ */
 public class SelectFlightPage extends Page {
 
     public static final String PAGE_NAME = "SELECT FLIGHT";
@@ -30,49 +33,84 @@ public class SelectFlightPage extends Page {
         super(driver);
     }
 
+    /**
+     * Возврвщает путь вылета.
+     * @return
+     */
     public String getWayDepart() {
         return wayDepartFontEl.getText();
     }
 
+    /**
+     * Возврвщает дату вылета.
+     * @return
+     */
     public String getDateDepart() {
         return dateDepartFontEl.getText();
     }
 
+    /**
+     * Возврвщает путь возврата.
+     * @return
+     */
     public String getWayReturn() {
         return wayReturnFontEl.getText();
     }
 
+    /**
+     * Возврвщает дату возврата.
+     * @return
+     */
     public String getDateReturn() {
         return dateReturnFontEl.getText();
     }
 
+    /**
+     * Возврвщает Авиакомпанию вылета.
+     * @return
+     */
     public void setDepartFlight(final String flight) {
         String xpath = getXPathDepartFlight(flight);
-        WebElement departFlightUnifiedAirlines = driver.findElement(By.xpath(xpath));
+        WebElement departFlightUnifiedAirlines = getDriver().findElement(By.xpath(xpath));
         departFlightUnifiedAirlines.click();
     }
 
+    /**
+     *
+     * @param flight
+     */
     public void setReturnFlight(final String flight) {
         String xpath = getXPathReturnFlight(flight);
-        WebElement returnFlightUnifiedAirlines = driver.findElement(By.xpath(xpath));
+        WebElement returnFlightUnifiedAirlines = getDriver().findElement(By.xpath(xpath));
         returnFlightUnifiedAirlines.click();
     }
 
+    /**
+     *Method.
+     */
     public void clickContinue() {
         buttonContinue.click();
     }
 
+    /**
+     *Method.
+     */
     public int getPriceDepartFlight(final String flight) {
         String xpathFlight = getXPathDepartFlight(flight);
-        WebElement elementAirlanesPrice = driver.findElement(By.xpath(xpathFlight + "/parent::*/parent::*/following-sibling::*//b"));
+        WebElement elementAirlanesPrice = getDriver().findElement(By.xpath(xpathFlight
+                + "/parent::*/parent::*/following-sibling::*//b"));
         String price = elementAirlanesPrice.getText();
         price = price.replace("Price: $", "");
         return Integer.parseInt(price);
     }
 
+    /**
+     *Method.
+     */
     public int getPriceReturnFlight(final String flight) {
         String xpathFlight = getXPathReturnFlight(flight);
-        WebElement elementAirlanesPrice = driver.findElement(By.xpath(xpathFlight + "/parent::*/parent::*/following-sibling::*//b"));
+        WebElement elementAirlanesPrice = getDriver().findElement(By.xpath(xpathFlight
+                + "/parent::*/parent::*/following-sibling::*//b"));
         String price = elementAirlanesPrice.getText();
         price = price.replace("Price: $", "");
         return Integer.parseInt(price);

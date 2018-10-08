@@ -8,12 +8,20 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
+/**
+ * Класс для проверки страницы BOOK A FLIGHT.
+ */
 public class BookAFlightPage extends Page {
 
     public static final String PAGE_NAME = "BOOK A FLIGHT";
     public static final String TITLE = "Book a Flight: Mercury Tours";
+    public static final int INDEX_OF_CLASS_RETURN = 4;
+    public static final int INDEX_OF_PRICE_RETURN = 5;
 
-    public enum AddressType {Billing, Delivery}
+    /**
+     * Перечисление возможных типов адресов.
+     */
+    public enum AddressType { Billing, Delivery }
 
     //Summary
 
@@ -46,64 +54,119 @@ public class BookAFlightPage extends Page {
         super(driver);
     }
 
+    /**
+     * Возвращает путь вылета.
+     * @return
+     */
     public String getWayDepart() {
         return listOfWayDatDepart.get(0).getText();
     }
 
+    /**
+     * Возвращает дату вылета.
+     * @return
+     */
     public String getDateDepart() {
         return listOfWayDatDepart.get(1).getText();
     }
 
+    /**
+     * Возвращает Авиакомпанию вылета.
+     * @return
+     */
     public String getFlightDepart() {
         return listOfFlightInfoDepart.get(0).getText();
     }
 
+    /**
+     * Возвращает класс вылета.
+     * @return
+     */
     public String getClassDepart() {
         return listOfFlightInfoDepart.get(1).getText();
     }
 
+    /**
+     * Возвращает цену вылета.
+     * @return
+     */
     public int getPriceDepart() {
         return Integer.parseInt(listOfFlightInfoDepart.get(2).getText());
     }
 
+    /**
+     * Возвращает путь вылета.
+     * @return
+     */
     public String getWayReturn() {
         return listOfWayDateReturn.get(0).getText();
     }
 
+    /**
+     * Возвращает путь возврата.
+     * @return
+     */
     public String getDateReturn() {
         return listOfWayDateReturn.get(1).getText();
     }
 
+    /**
+     * Возвращает Авиакомпанию возврата.
+     * @return
+     */
     public String getFlightReturn() {
         return listOfFlightInfoReturn.get(2).getText();
     }
 
+    /**
+     * Возвращает класс возврата.
+     * @return
+     */
     public String getClassReturn() {
-        return listOfFlightInfoReturn.get(4).getText();
+        return listOfFlightInfoReturn.get(INDEX_OF_CLASS_RETURN).getText();
     }
 
+    /**
+     * Возвращает цену возврата.
+     * @return
+     */
     public int getPriceReturn() {
-        return Integer.parseInt(listOfFlightInfoReturn.get(5).getText());
+        return Integer.parseInt(listOfFlightInfoReturn.get(INDEX_OF_PRICE_RETURN).getText());
     }
 
+    /**
+     * Возвращает количество пассажиров.
+     * @return
+     */
     public int getPassengers() {
         return Integer.parseInt(passengersElem.getText());
     }
 
+    /**
+     * Возвращает сумму налога.
+     * @return
+     */
     public int getTaxes() {
         return Integer.parseInt(taxesElem.getText().replace("$", ""));
     }
 
+    /**
+     * Возвращает общую сумму.
+     * @return
+     */
     public int getTotalPrice() {
         return Integer.parseInt(totalPriceElem.getText().replace("$", ""));
     }
 
 
-    public void setPassengers(int number, final String firstName, final String lastName, final String meal) {
-        number--;
-        WebElement inputFirstName = driver.findElement(By.xpath("//input[@name = 'passFirst" + number + "']"));
-        WebElement inputLastName = driver.findElement(By.xpath("//input[@name = 'passLast" + number + "']"));
-        WebElement selectMealEl = driver.findElement(By.xpath("//select [@name = 'pass." + number + ".meal']"));
+    /**
+     * Устанавливает количество пассажиров.
+     */
+    public void setPassengers(final int number, final String firstName, final String lastName, final String meal) {
+        int index = number - 1;
+        WebElement inputFirstName = getDriver().findElement(By.xpath("//input[@name = 'passFirst" + index + "']"));
+        WebElement inputLastName = getDriver().findElement(By.xpath("//input[@name = 'passLast" + index + "']"));
+        WebElement selectMealEl = getDriver().findElement(By.xpath("//select [@name = 'pass." + index + ".meal']"));
 
         Select selectMeal = new Select(selectMealEl);
 
@@ -113,16 +176,19 @@ public class BookAFlightPage extends Page {
 
     }
 
-    //Block Credit Card
+
+    /**
+     * Устанавливает информацию о кредитной карте.
+     */
     public void setCreditCard(final String type, final String number, final String month, final String year,
                               final String firstName, final String middleName, final String lastName) {
-        WebElement selectTypeEl = driver.findElement(By.xpath("//select [@name = 'creditCard']"));
-        WebElement inputNumber = driver.findElement(By.xpath("//input[@name='creditnumber']"));
-        WebElement selectMonthEl = driver.findElement(By.xpath("//select [@name = 'cc_exp_dt_mn']"));
-        WebElement selectYearEl = driver.findElement(By.xpath("//select [@name = 'cc_exp_dt_yr']"));
-        WebElement inputFirstName = driver.findElement(By.xpath("//input[@name='cc_frst_name']"));
-        WebElement inputMiddleName = driver.findElement(By.xpath("//input[@name='cc_mid_name']"));
-        WebElement inputLastName = driver.findElement(By.xpath("//input[@name='cc_last_name']"));
+        WebElement selectTypeEl = getDriver().findElement(By.xpath("//select [@name = 'creditCard']"));
+        WebElement inputNumber = getDriver().findElement(By.xpath("//input[@name='creditnumber']"));
+        WebElement selectMonthEl = getDriver().findElement(By.xpath("//select [@name = 'cc_exp_dt_mn']"));
+        WebElement selectYearEl = getDriver().findElement(By.xpath("//select [@name = 'cc_exp_dt_yr']"));
+        WebElement inputFirstName = getDriver().findElement(By.xpath("//input[@name='cc_frst_name']"));
+        WebElement inputMiddleName = getDriver().findElement(By.xpath("//input[@name='cc_mid_name']"));
+        WebElement inputLastName = getDriver().findElement(By.xpath("//input[@name='cc_last_name']"));
 
         Select selectType = new Select(selectTypeEl);
         Select selectMonth = new Select(selectMonthEl);
@@ -137,7 +203,11 @@ public class BookAFlightPage extends Page {
         inputLastName.sendKeys(lastName);
     }
 
-    public void setAddress(boolean checkBox, final String address, final String city, final String stateProvince,
+    /**
+     * Устанавливает адрес платильщика или адрес
+     * назначения в зависимомти от параметра addressType.
+     */
+    public void setAddress(final boolean checkBox, final String address, final String city, final String stateProvince,
                            final String postalCode, final String country, final AddressType addressType) {
 
         String type;
@@ -154,12 +224,13 @@ public class BookAFlightPage extends Page {
             default:
                 throw new IllegalArgumentException("Unknown addressType");
         }
-        WebElement inputCheckBox = driver.findElement(By.xpath("(//input[@name = 'ticketLess'])[" + positionCheckBox + "]"));
-        WebElement inputAddress = driver.findElement(By.xpath("//input[@name = '" + type + "Address1']"));
-        WebElement inputCity = driver.findElement(By.xpath("//input[@name = '" + type + "City']"));
-        WebElement inputStateProvince = driver.findElement(By.xpath("//input[@name = '" + type + "State']"));
-        WebElement inputPostalCode = driver.findElement(By.xpath("//input[@name = '" + type + "Zip']"));
-        WebElement selectContryEl = driver.findElement(By.xpath("//select[@name = '" + type + "Country']"));
+        WebElement inputCheckBox = getDriver().findElement(By.xpath("(//input[@name = 'ticketLess'])["
+                + positionCheckBox + "]"));
+        WebElement inputAddress = getDriver().findElement(By.xpath("//input[@name = '" + type + "Address1']"));
+        WebElement inputCity = getDriver().findElement(By.xpath("//input[@name = '" + type + "City']"));
+        WebElement inputStateProvince = getDriver().findElement(By.xpath("//input[@name = '" + type + "State']"));
+        WebElement inputPostalCode = getDriver().findElement(By.xpath("//input[@name = '" + type + "Zip']"));
+        WebElement selectContryEl = getDriver().findElement(By.xpath("//select[@name = '" + type + "Country']"));
 
         Select selectCountry = new Select(selectContryEl);
 
@@ -180,8 +251,12 @@ public class BookAFlightPage extends Page {
 
     }
 
+    /**
+     * Возвращает путь вылета.
+     * @return
+     */
     public void clickSecurePurchase() {
-        WebElement buttonSecurePurchase = driver.findElement(By.xpath("//input[@name = 'buyFlights']"));
+        WebElement buttonSecurePurchase = getDriver().findElement(By.xpath("//input[@name = 'buyFlights']"));
         buttonSecurePurchase.click();
     }
 
