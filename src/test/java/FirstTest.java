@@ -24,8 +24,6 @@ import java.util.logging.Logger;
  * The class was created for test my first test.
  */
 public class FirstTest {
-    public static final String LOGIN = "tutorial";
-    public static final String PASSWORD = "tutorial";
     public static final int TIMEOUT = 10;
     public static final int PRICE_DEPART = 281;
     public static final int PRICE_RETURN = 273;
@@ -84,27 +82,29 @@ public class FirstTest {
     }
 
     private void setWelcomePage() {
-        welcomeStep.inputLogin(jdbc.executeValue("login"));
-        welcomeStep.inputPassword(PASSWORD);
+        welcomeStep.inputLogin(jdbc.executeValue("LOGIN"));
+        welcomeStep.inputPassword(jdbc.executeValue("PASSWORD"));
         welcomeStep.clickSignInImage();
     }
 
     private void setFlightFinderPage() {
         flightFinderStep.setType(FlightFinderPage.Type.One_Way);
-        flightFinderStep.setPassengers(2);
-        flightFinderStep.setDepartingFrom("Paris");
-        flightFinderStep.setOn("November", "20");
-        flightFinderStep.setArrivingIn("Seattle");
-        flightFinderStep.setReturning("December", "19");
+        flightFinderStep.setPassengers(Integer.parseInt(jdbc.executeValue("countPassengers")));
+        flightFinderStep.setDepartingFrom(jdbc.executeValue("DepartingFrom"));
+        flightFinderStep.setOn(jdbc.executeValue("onMonth"),
+                jdbc.executeValue("onDay"));
+        flightFinderStep.setArrivingIn(jdbc.executeValue("arrivingIn"));
+        flightFinderStep.setReturning(jdbc.executeValue("returningMonth"),
+                jdbc.executeValue("returningDay"));
         flightFinderStep.setServiceClass(FlightFinderPage.ServiceClass.BusinessClass);
-        flightFinderStep.setAirline("Pangea Airlines");
+        flightFinderStep.setAirline(jdbc.executeValue("desiredAirline"));
         flightFinderStep.clickContinueButton();
     }
 
     private void testSelectFlightPage() {
         selectFlightStep.initFields();
-        selectFlightStep.setDepartFlight("Unified Airlines 363");
-        selectFlightStep.setReturnFlight("Blue Skies Airlines 631");
+        selectFlightStep.setDepartFlight(jdbc.executeValue("flightDepart"));
+        selectFlightStep.setReturnFlight(jdbc.executeValue("flightReturn"));
         checkValueSelectFlightPage();
         selectFlightStep.clickContinueButton();
     }
@@ -112,19 +112,19 @@ public class FirstTest {
     private void checkValueSelectFlightPage() {
         checkValuePage(SelectFlightPage.PAGE_NAME,
                 "wayDepart",
-                "Paris to Seattle",
+                jdbc.executeValue("wayDepart"),
                 selectFlightStep.getWayDepart());
         checkValuePage(SelectFlightPage.PAGE_NAME,
                 "dateDepart",
-                "11/20/2018",
+                jdbc.executeValue("dateDepart"),
                 selectFlightStep.getDateDepart());
         checkValuePage(SelectFlightPage.PAGE_NAME,
                 "wayReturn",
-                "Seattle to Paris",
+                jdbc.executeValue("wayReturn"),
                 selectFlightStep.getWayReturn());
         checkValuePage(SelectFlightPage.PAGE_NAME,
                 "dateReturn",
-                "12/19/2018",
+                jdbc.executeValue("dateReturn"),
                 selectFlightStep.getDateReturn());
     }
 
@@ -138,85 +138,85 @@ public class FirstTest {
     private void checkValueBookAFlightPage() {
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "wayDepart",
-                "Paris to Seattle",
+                jdbc.executeValue("wayDepart"),
                 bookAFlightStep.getWayDepart());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "dateDepart",
-                "11/20/2018",
+                jdbc.executeValue("dateDepart"),
                 bookAFlightStep.getDateDepart());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "flightDepart",
-                "Unified Airlines 363",
+                jdbc.executeValue("flightDepart"),
                 bookAFlightStep.getFlightDepart());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "classDepart",
-                "Business",
+                jdbc.executeValue("classDepart"),
                 bookAFlightStep.getClassDepart());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "priceDepart",
-                PRICE_DEPART,
+                Integer.parseInt(jdbc.executeValue("priceDepart")),
                 bookAFlightStep.getPriceDepart());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "wayReturn",
-                "Seattle to Paris",
+                jdbc.executeValue("wayReturn"),
                 bookAFlightStep.getWayReturn());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "dateReturn",
-                "12/19/2018",
+                jdbc.executeValue("dateReturn"),
                 bookAFlightStep.getDateReturn());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "flightReturn",
-                "Blue Skies Airlines 631",
+                jdbc.executeValue("flightReturn"),
                 bookAFlightStep.getFlightReturn());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "classReturn",
-                "Business",
+                jdbc.executeValue("classReturn"),
                 bookAFlightStep.getClassReturn());
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "priceReturn",
-                PRICE_RETURN,
+                Integer.parseInt(jdbc.executeValue("priceReturn")),
                 bookAFlightStep.getPriceReturn());
         int totalPrice = (bookAFlightStep.getPriceDepart() + bookAFlightStep.getPriceReturn())
                 * bookAFlightStep.getPassengers() + bookAFlightStep.getTaxes();
         checkValuePage(BookAFlightPage.PAGE_NAME,
-                "totalPrice",
-                TOTAL_PRICE,
+                "priceTotal",
+                Integer.parseInt(jdbc.executeValue("priceTotal")),
                 totalPrice);
 
     }
     private void setValueBookAFlightPage() {
         log.info("\nSet Value BookAFlightPage");
         bookAFlightStep.setPassengers(1,
-                "Ivanov",
-                "Ivan",
-                "Hindu");
+                jdbc.executeValue("firstNamePass1"),
+                jdbc.executeValue("lastNamePass1"),
+                jdbc.executeValue("mealPass1"));
         bookAFlightStep.setPassengers(2,
-                "Ivanova",
-                "Irina",
-                "Bland");
+                jdbc.executeValue("firstNamePass2"),
+                jdbc.executeValue("lastNamePass2"),
+                jdbc.executeValue("mealPass2"));
 
-        bookAFlightStep.setCreditCard("Visa",
-                "5479540454132487",
-                "05",
-                "2009",
-                "Ivan",
-                "Ivanovich",
-                "Ivanov");
+        bookAFlightStep.setCreditCard(jdbc.executeValue("creditCardType"),
+                jdbc.executeValue("creditCardNumber"),
+                jdbc.executeValue("creditCardMonth"),
+                jdbc.executeValue("creditCardYear"),
+                jdbc.executeValue("creditCardFirstName"),
+                jdbc.executeValue("creditCardMiddleName"),
+                jdbc.executeValue("creditCardLastName"));
 
         bookAFlightStep.setAddress(false,
-                "1085 Borregas Ave.",
-                "Albuquerque",
-                "New Mexico",
-                "94089",
-                "UNITED STATES",
+                jdbc.executeValue("BillingAddress"),
+                jdbc.executeValue("BillingCity"),
+                jdbc.executeValue("BillingStateProvince"),
+                jdbc.executeValue("BillingPostalCode"),
+                jdbc.executeValue("BillingCountry"),
                 BookAFlightPage.AddressType.Billing);
 
         bookAFlightStep.setAddress(true,
-                "1225 Borregas Ave.",
-                "Boston",
-                "Massachusetts",
-                "91089",
-                "UNITED STATES",
+                jdbc.executeValue("DeliveryAddress"),
+                jdbc.executeValue("DeliveryCity"),
+                jdbc.executeValue("DeliveryStateProvince"),
+                jdbc.executeValue("DeliveryPostalCode"),
+                jdbc.executeValue("DeliveryCountry"),
                 BookAFlightPage.AddressType.Delivery);
     }
 
