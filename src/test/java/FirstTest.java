@@ -1,6 +1,7 @@
 import jdbc.JDBC;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,9 @@ import java.util.logging.Logger;
  */
 public class FirstTest {
     public static final int TIMEOUT = 10;
+
+    @Rule
+    public final MyRule myRule = new MyRule();
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
     private static JDBC jdbc;
     private static WebDriver driver;
@@ -34,6 +38,9 @@ public class FirstTest {
     private static BookAFlightStep bookAFlightStep;
     private static FlightConfirmationStep flightConfirmationStep;
 
+    public static WebDriver getDriver() {
+        return driver;
+    }
 
     @BeforeClass
     public static void setup() {
@@ -48,7 +55,7 @@ public class FirstTest {
         bookAFlightStep = new BookAFlightStep(driver);
         flightConfirmationStep = new FlightConfirmationStep(driver);
         driver.manage().window().maximize();
-        //driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get("http://newtours.demoaut.com/");
     }
 
@@ -79,7 +86,7 @@ public class FirstTest {
 
     private void setWelcomePage() {
         welcomeStep.inputLogin(jdbc.executeValue("LOGIN"));
-        welcomeStep.inputPassword(jdbc.executeValue("PASSWORD"));
+        welcomeStep.inputPassword(jdbc.executeValue("PASSWORD1"));
         welcomeStep.clickSignInImage();
     }
 
