@@ -5,6 +5,9 @@
 .idea/workspace.xml
 .idea/tasks.xml
 
+# Fail-screen:
+/src/test/screen
+
 # Sensitive or high-churn files:
 .idea/dataSources/
 .idea/dataSources.ids

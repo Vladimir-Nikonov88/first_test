@@ -55,16 +55,17 @@ public class MyRule extends TestWatcher {
         if (augmentedDriver instanceof TakesScreenshot) {
             screenshot = ((TakesScreenshot) augmentedDriver).
                     getScreenshotAs(OutputType.FILE);
+            Date dateNow = new Date();
+            SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy_MM_dd___HH_mm_ss");
+            try {
+                FileUtils.copyFile(screenshot, new File(path + formatForDateNow.format(dateNow) + ".png"));
+            } catch (IOException ex) {
+                e.printStackTrace();
+            }
         } else {
             log.warning("Failed to create fail-screenshot");
         }
-        Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy_MM_dd___HH_mm_ss");
-        try {
-            FileUtils.copyFile(screenshot, new File(path + formatForDateNow.format(dateNow) + ".png"));
-        } catch (IOException ex) {
-            e.printStackTrace();
-        }
+
     }
 
     /**
