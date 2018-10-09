@@ -25,9 +25,6 @@ import java.util.logging.Logger;
  */
 public class FirstTest {
     public static final int TIMEOUT = 10;
-    public static final int PRICE_DEPART = 281;
-    public static final int PRICE_RETURN = 273;
-    public static final int TOTAL_PRICE = 1199;
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
     private static JDBC jdbc;
     private static WebDriver driver;
@@ -51,8 +48,7 @@ public class FirstTest {
         bookAFlightStep = new BookAFlightStep(driver);
         flightConfirmationStep = new FlightConfirmationStep(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
-        //   http://newtours.demoaut.com/
+        //driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get("http://newtours.demoaut.com/");
     }
 

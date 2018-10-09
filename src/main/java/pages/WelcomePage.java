@@ -28,16 +28,8 @@ public class WelcomePage extends Page {
     /**
      *Method.
      */
-    public void singIn(final String login, final String password) {
-        inputLogin("tutorial");
-        inputPassword("tutorial");
-        clickSignInImage();
-    }
-
-    /**
-     *Method.
-     */
     public void inputLogin(final String login) {
+        wait(loginField);
         loginField.sendKeys(login);
     }
 
