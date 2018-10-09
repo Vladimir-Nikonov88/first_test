@@ -2,9 +2,9 @@ package jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Logger;
 
 /**
@@ -14,7 +14,6 @@ public class JDBC {
 
     private static Logger log = Logger.getLogger(JDBC.class.getName());
     private  Connection con;
-    private  Statement stmt;
     private  ResultSet rs;
 
     private  String url = "jdbc:MySQL://vm-autotest06t:3306/sandbox";
@@ -29,21 +28,38 @@ public class JDBC {
      */
     public String executeValue(final String name) {
         connect();
+        PreparedStatement stmt = null;
         try {
-            rs = stmt.executeQuery("select * from tabletest where NAME = '" + name + "'");
-            while (rs.next()) {
+            stmt = con.prepareStatement("select * from tabletest where NAME = ?");
+            stmt.setString(1, name);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
                 return rs.getString("value");
+            } else {
+                throw new IllegalArgumentException("Incorrect name variable = " + name);
             }
         } catch (SQLException e) {
-            log.info("Incorrect name variable");
+            log.info("Incorrect SQL Query");
             e.printStackTrace();
-
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
         disconnect();
         return null;
     }
-
 
     private void connect() {
         try {
@@ -54,12 +70,13 @@ public class JDBC {
         }
         try {
             this.con = DriverManager.getConnection(url, user, password);
-            this.stmt = con.createStatement();
         } catch (SQLException e2) {
             log.info(String.format("Failed to connect to BD"));
             e2.printStackTrace();
             try {
-                con.close();
+                if (con != null) {
+                    con.close();
+                }
             } catch (SQLException e3) {
                 log.info("Error Connection close");
                 e3.printStackTrace();
@@ -70,7 +87,9 @@ public class JDBC {
 
     private void disconnect() {
         try {
-            con.close();
+            if (con != null) {
+                con.close();
+            }
         } catch (SQLException e3) {
             log.info("Error Connection close");
             e3.printStackTrace();
