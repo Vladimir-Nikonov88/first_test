@@ -1,6 +1,7 @@
 package steps;
 
-import org.openqa.selenium.WebDriver;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
 import pages.FlightConfirmationPage;
 
 import java.util.logging.Logger;
@@ -8,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Class.
  */
-public class FlightConfirmationStep {
+public class FlightConfirmationStep extends ScenarioSteps {
 
     private static Logger log = Logger.getLogger(BookAFlightStep.class.getName());
     private FlightConfirmationPage flightConfirmationPage;
@@ -35,10 +36,6 @@ public class FlightConfirmationStep {
     private String deliveryCity;
     private String deliveryStateProvince;
     private String deliveryPostalCode;
-
-    public FlightConfirmationStep(final WebDriver driver) {
-        this.flightConfirmationPage = new FlightConfirmationPage(driver);
-    }
 
     /**
      *Method.
@@ -197,6 +194,7 @@ public class FlightConfirmationStep {
     /**
      *Method.
      */
+    @Step
     public void clickButtonBackToHome() {
         log.info("Click Back To Home Button");
         flightConfirmationPage.clickButtonBackToHome();

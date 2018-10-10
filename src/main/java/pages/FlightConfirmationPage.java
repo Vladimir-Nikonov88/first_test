@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -36,10 +35,6 @@ public class FlightConfirmationPage extends Page {
 
     @FindBy(xpath = "(//font[contains(text(),'Confirmation')]//ancestor::tbody[2]//child::font[1])[28]")
     private WebElement fontTotalPriceEl;
-
-    public FlightConfirmationPage(final WebDriver driver) {
-        super(driver);
-    }
 
     /**
      *Method.

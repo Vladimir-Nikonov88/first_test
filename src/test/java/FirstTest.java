@@ -1,12 +1,16 @@
-import io.qameta.allure.Step;
+
 import jdbc.JDBC;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.Assert;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pages.BookAFlightPage;
 import pages.FlightConfirmationPage;
 import pages.FlightFinderPage;
@@ -18,45 +22,39 @@ import steps.FlightFinderStep;
 import steps.SelectFlightStep;
 import steps.WelcomeStep;
 
+import static steps.SupportSteps.checkValuePage;
 
-import java.util.concurrent.TimeUnit;
+
 import java.util.logging.Logger;
 
 /**
  * The class was created for test my first test.
  */
+@RunWith(SerenityRunner.class)
 public class FirstTest {
-    public static final int TIMEOUT = 10;
 
+    private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
+    private JDBC jdbc;
     @Rule
     public final MyRule myRule = new MyRule();
-    private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
-    private static JDBC jdbc;
-    private static WebDriver driver;
-    private static WelcomeStep welcomeStep;
-    private static FlightFinderStep flightFinderStep;
-    private static SelectFlightStep selectFlightStep;
-    private static BookAFlightStep bookAFlightStep;
-    private static FlightConfirmationStep flightConfirmationStep;
+    @Managed
+    private WebDriver driver;
+    @Steps
+    private WelcomeStep welcomeStep;
+    @Steps
+    private FlightFinderStep flightFinderStep;
+    @Steps
+    private SelectFlightStep selectFlightStep;
+    @Steps
+    private BookAFlightStep bookAFlightStep;
+    @Steps
+    private FlightConfirmationStep flightConfirmationStep;
 
-    public static WebDriver getDriver() {
-        return driver;
-    }
-
-    @BeforeClass
-    public static void setup() {
+    @Before
+    public void setup() {
         System.setProperty("java.util.logging.config.file",
                 "src/main/resources/logging.properties");
-        System.setProperty("webdriver.chrome.driver", "C:\\selenium\\chromedriver.exe");
         jdbc = new JDBC();
-        driver = new ChromeDriver();
-        welcomeStep = new WelcomeStep(driver);
-        flightFinderStep = new FlightFinderStep(driver);
-        selectFlightStep = new SelectFlightStep(driver);
-        bookAFlightStep = new BookAFlightStep(driver);
-        flightConfirmationStep = new FlightConfirmationStep(driver);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(TIMEOUT, TimeUnit.SECONDS);
         driver.get("http://newtours.demoaut.com/");
     }
 
@@ -80,15 +78,15 @@ public class FirstTest {
         checkCurrentPage(WelcomePage.PAGE_NAME, WelcomePage.TITLE);
     }
 
-    @AfterClass
-    public static void tearDown() {
+    @After
+    public void tearDown() {
         driver.quit();
     }
 
     @Step("Ввод логина и пароля на стартовой странице")
     private void setWelcomePage() {
         welcomeStep.inputLogin(jdbc.executeValue("LOGIN"));
-        welcomeStep.inputPassword(jdbc.executeValue("PASSWORD1"));
+        welcomeStep.inputPassword(jdbc.executeValue("PASSWORD"));
         welcomeStep.clickSignInImage();
     }
     @Step("Ввод значений на странице FlightFinder")
@@ -350,29 +348,6 @@ public class FirstTest {
             Assert.assertTrue(true);
         } else {
             System.out.println("FAIL: Current page incorrect");
-            Assert.fail();
-        }
-    }
-
-    @Step("Проверка корректности значения {nameVariable} (expected: {expected} / actual: {actual})")
-    private void checkValuePage(final String namePage,
-                                final String nameVariable,
-                                final Object expected,
-                                final Object actual) {
-        String mark = "";
-        if (expected instanceof String && actual instanceof String) {
-            mark = "%s";
-        } else if (expected instanceof Integer && actual instanceof Integer) {
-            mark = "%d";
-        } else {
-            throw new IllegalArgumentException();
-        }
-        if (expected.equals(actual)) {
-            log.info(String.format("CORRECT value Page: %s, name: %s \texpected = " + mark + ", actual = "
-                    + mark, namePage, nameVariable, expected, actual));
-        } else {
-            log.info(String.format("INCORRECT!!! value Page: %s, name: %s \texpected = " + mark + ", actual = "
-                    + mark, namePage, nameVariable, expected, actual));
             Assert.fail();
         }
     }

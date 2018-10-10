@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -21,15 +20,10 @@ public class WelcomePage extends Page {
     @FindBy(xpath = "//input [@type='image' and @name='login']")
     private WebElement signInImage;
 
-    public WelcomePage(final WebDriver driver) {
-        super(driver);
-    }
-
     /**
      *Method.
      */
     public void inputLogin(final String login) {
-        wait(loginField);
         loginField.sendKeys(login);
     }
 

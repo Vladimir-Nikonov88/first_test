@@ -1,7 +1,7 @@
 package steps;
 
-
-import org.openqa.selenium.WebDriver;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
 import pages.WelcomePage;
 
 import java.util.logging.Logger;
@@ -9,18 +9,15 @@ import java.util.logging.Logger;
 /**
  * Class.
  */
-public class WelcomeStep {
+public class WelcomeStep extends ScenarioSteps {
 
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
     private WelcomePage welcomePage;
 
-    public WelcomeStep(final WebDriver driver) {
-        this.welcomePage = new WelcomePage(driver);
-    }
-
     /**
      *Method.
      */
+    @Step
     public void inputLogin(final String login) {
         log.info("Set login: " + login);
         welcomePage.inputLogin(login);
@@ -29,6 +26,7 @@ public class WelcomeStep {
     /**
      *Method.
      */
+    @Step
     public void inputPassword(final String password) {
         log.info("Set password: " + password);
         welcomePage.inputPassword(password);
@@ -37,6 +35,7 @@ public class WelcomeStep {
     /**
      *Method.
      */
+    @Step
     public void clickSignInImage() {
         log.info("Click SignIn Button");
         welcomePage.clickSignInImage();

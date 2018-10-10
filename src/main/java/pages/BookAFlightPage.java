@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -49,10 +48,6 @@ public class BookAFlightPage extends Page {
 
     @FindBy(xpath = "//input[@name = 'passFirst0']")
     private WebElement firstNamePassOneEl;
-
-    public BookAFlightPage(final WebDriver driver) {
-        super(driver);
-    }
 
     /**
      * Возвращает путь вылета.

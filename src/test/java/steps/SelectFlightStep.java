@@ -1,6 +1,7 @@
 package steps;
 
-import org.openqa.selenium.WebDriver;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
 import pages.SelectFlightPage;
 
 import java.util.logging.Logger;
@@ -8,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Class.
  */
-public class SelectFlightStep {
+public class SelectFlightStep extends ScenarioSteps {
 
     private static Logger log = Logger.getLogger(SelectFlightStep.class.getName());
     private SelectFlightPage selectFlightPage;
@@ -21,10 +22,6 @@ public class SelectFlightStep {
     private String dateReturn;
     private String flightReturn;
     private int priceReturn;
-
-    public SelectFlightStep(final WebDriver driver) {
-        this.selectFlightPage = new SelectFlightPage(driver);
-    }
 
     /**
      *Method.
@@ -85,6 +82,7 @@ public class SelectFlightStep {
     /**
      *Method.
      */
+    @Step
     public void setDepartFlight(final String flight) {
         log.info("Set Depart Flight: " + flight);
         selectFlightPage.setDepartFlight(flight);
@@ -95,6 +93,7 @@ public class SelectFlightStep {
     /**
      *Method.
      */
+    @Step
     public void setReturnFlight(final String flight) {
         log.info("Set Return Flight: " + flight);
         selectFlightPage.setReturnFlight(flight);
@@ -105,6 +104,7 @@ public class SelectFlightStep {
     /**
      *Method.
      */
+    @Step
     public void clickContinueButton() {
         log.info("Click Continue Button");
         selectFlightPage.clickContinue();

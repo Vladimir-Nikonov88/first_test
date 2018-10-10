@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -60,10 +59,6 @@ public class FlightFinderPage extends Page {
 
     @FindBy(xpath = "//input [@name = 'findFlights']")
     private WebElement imageContinue;
-
-    public FlightFinderPage(final WebDriver driver) {
-        super(driver);
-    }
 
     /**
      *Method.

@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -27,11 +26,6 @@ public class SelectFlightPage extends Page {
 
     @FindBy(xpath = "//input [@name='reserveFlights']")
     private WebElement buttonContinue;
-
-
-    public SelectFlightPage(final WebDriver driver) {
-        super(driver);
-    }
 
     /**
      * Возврвщает путь вылета.

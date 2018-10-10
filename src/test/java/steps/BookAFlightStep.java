@@ -1,6 +1,8 @@
 package steps;
 
-import org.openqa.selenium.WebDriver;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.pages.Pages;
+import net.thucydides.core.steps.ScenarioSteps;
 import pages.BookAFlightPage;
 
 import java.util.logging.Logger;
@@ -10,7 +12,7 @@ import static pages.BookAFlightPage.AddressType;
 /**
  * Class.
  */
-public class BookAFlightStep {
+public class BookAFlightStep extends ScenarioSteps {
 
     private static Logger log = Logger.getLogger(BookAFlightStep.class.getName());
     private BookAFlightPage bookAFlightPage;
@@ -42,8 +44,8 @@ public class BookAFlightStep {
     private String deliveryStateProvince;
     private String deliveryPostalCode;
 
-    public BookAFlightStep(final WebDriver driver) {
-        this.bookAFlightPage = new BookAFlightPage(driver);
+    public BookAFlightStep(final Pages pages) {
+            super(pages);
     }
 
     /**
@@ -203,6 +205,7 @@ public class BookAFlightStep {
     /**
      *Method.
      */
+    @Step
     public void setPassengers(final int number, final String firstName, final String lastName, final String meal) {
         log.info(String.format("Set Passenger Info (number: %s, first name: %s, last name: %s, meal: %s)",
                 number, firstName, lastName, meal));
@@ -213,6 +216,7 @@ public class BookAFlightStep {
     /**
      *Method.
      */
+    @Step
     public void setCreditCard(final String type, final String number, final String month, final String year,
                               final String firstName, final String middleName, final String lastName) {
 
@@ -227,6 +231,7 @@ public class BookAFlightStep {
     /**
      *Method.
      */
+    @Step
     public void setAddress(final boolean checkBox, final String address, final String city, final String stateProvince,
                            final String postalCode, final String country, final AddressType addressType) {
         log.info(String.format("Set %s Address (address: %s, city: %s, State/Province: %s, Postal Code: %s,"
