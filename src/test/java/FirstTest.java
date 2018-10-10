@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import jdbc.JDBC;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -84,12 +85,13 @@ public class FirstTest {
         driver.quit();
     }
 
+    @Step("Ввод логина и пароля на стартовой странице")
     private void setWelcomePage() {
         welcomeStep.inputLogin(jdbc.executeValue("LOGIN"));
         welcomeStep.inputPassword(jdbc.executeValue("PASSWORD1"));
         welcomeStep.clickSignInImage();
     }
-
+    @Step("Ввод значений на странице FlightFinder")
     private void setFlightFinderPage() {
         flightFinderStep.setType(FlightFinderPage.Type.One_Way);
         flightFinderStep.setPassengers(Integer.parseInt(jdbc.executeValue("countPassengers")));
@@ -104,6 +106,7 @@ public class FirstTest {
         flightFinderStep.clickContinueButton();
     }
 
+    @Step("Тест страницы SelectFlight")
     private void testSelectFlightPage() {
         selectFlightStep.initFields();
         selectFlightStep.setDepartFlight(jdbc.executeValue("flightDepart"));
@@ -112,6 +115,7 @@ public class FirstTest {
         selectFlightStep.clickContinueButton();
     }
 
+    @Step("Проверка страницы SelectFlight")
     private void checkValueSelectFlightPage() {
         checkValuePage(SelectFlightPage.PAGE_NAME,
                 "wayDepart",
@@ -131,6 +135,7 @@ public class FirstTest {
                 selectFlightStep.getDateReturn());
     }
 
+    @Step("Тест страницы BookAFlight")
     private void testBookAFlightPage() {
         bookAFlightStep.initFields();
         checkValueBookAFlightPage();
@@ -138,6 +143,7 @@ public class FirstTest {
         bookAFlightStep.clickSecurePurchaseButton();
     }
 
+    @Step("Проверка страницы BookAFlight")
     private void checkValueBookAFlightPage() {
         checkValuePage(BookAFlightPage.PAGE_NAME,
                 "wayDepart",
@@ -187,6 +193,8 @@ public class FirstTest {
                 totalPrice);
 
     }
+
+    @Step("Установка значений на странице BookAFlight")
     private void setValueBookAFlightPage() {
         log.info("\nSet Value BookAFlightPage");
         bookAFlightStep.setPassengers(1,
@@ -223,6 +231,7 @@ public class FirstTest {
                 BookAFlightPage.AddressType.Delivery);
     }
 
+    @Step("Тест страницы FlightConfirmation")
     private void testFlightConfirmationPage() {
         flightConfirmationStep.initFields();
         checkDepartFlightConfirmationPage();
@@ -234,6 +243,7 @@ public class FirstTest {
         flightConfirmationStep.clickButtonBackToHome();
     }
 
+    @Step("Проверка блока Depart страницы FlightConfirmation")
     private void checkDepartFlightConfirmationPage() {
         log.info("\nCheckDepart");
         checkValuePage(FlightConfirmationPage.PAGE_NAME,
@@ -250,6 +260,7 @@ public class FirstTest {
                 flightConfirmationStep.getFlightDepart());
     }
 
+    @Step("Проверка блока Return страницы FlightConfirmation")
     private void checkReturnFlightConfirmationPage() {
         log.info("\nCheckReturn");
         checkValuePage(FlightConfirmationPage.PAGE_NAME,
@@ -266,6 +277,7 @@ public class FirstTest {
                 flightConfirmationStep.getFlightReturn());
     }
 
+    @Step("Проверка блока CountPassengers страницы FlightConfirmation")
     private void checkCountPassengersFlightConfirmationPage() {
         log.info("\nCheckCountPassengers");
         checkValuePage(FlightConfirmationPage.PAGE_NAME,
@@ -274,6 +286,7 @@ public class FirstTest {
                 flightConfirmationStep.getCountPassengers());
     }
 
+    @Step("Проверка блока BilledTo страницы FlightConfirmation")
     private void checkBilledToFlightConfirmationPage() {
         log.info("\nCheckBilledTo");
         checkValuePage(FlightConfirmationPage.PAGE_NAME,
@@ -298,6 +311,7 @@ public class FirstTest {
                 flightConfirmationStep.getBilledToPostalCode());
     }
 
+    @Step("Проверка блока Delivery страницы FlightConfirmation")
     private void checkDeliveryFlightConfirmationPage() {
         log.info("\nCheckDelivery");
         checkValuePage(FlightConfirmationPage.PAGE_NAME,
@@ -318,6 +332,7 @@ public class FirstTest {
                 flightConfirmationStep.getDeliveryPostalCode());
     }
 
+    @Step("Проверка блока TotalPrice страницы FlightConfirmation")
     private void checkTotalPriceFlightConfirmationPage() {
         log.info("\nCheckTotalPrice");
         checkValuePage(FlightConfirmationPage.PAGE_NAME,
@@ -328,6 +343,7 @@ public class FirstTest {
                         + flightConfirmationStep.getTaxes());
     }
 
+    @Step("Проверка перехода на страцицу {namePage}")
     private void checkCurrentPage(final String namePage, final String nameTitle) {
         if (nameTitle.equals(driver.getTitle())) {
             System.out.println("\nNEW PAGE  " + namePage);
@@ -338,6 +354,7 @@ public class FirstTest {
         }
     }
 
+    @Step("Проверка корректности значения {nameVariable} (expected: {expected} / actual: {actual})")
     private void checkValuePage(final String namePage,
                                 final String nameVariable,
                                 final Object expected,

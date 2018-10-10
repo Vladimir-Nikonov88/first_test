@@ -1,3 +1,4 @@
+import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
@@ -8,6 +9,8 @@ import org.openqa.selenium.remote.Augmenter;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -57,8 +60,10 @@ public class MyRule extends TestWatcher {
                     getScreenshotAs(OutputType.FILE);
             Date dateNow = new Date();
             SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy_MM_dd___HH_mm_ss");
+            String nameScreen = formatForDateNow.format(dateNow) + ".png";
             try {
-                FileUtils.copyFile(screenshot, new File(path + formatForDateNow.format(dateNow) + ".png"));
+                FileUtils.copyFile(screenshot, new File(path + nameScreen));
+                getBytes(nameScreen);
             } catch (IOException ex) {
                 e.printStackTrace();
             }
@@ -75,5 +80,10 @@ public class MyRule extends TestWatcher {
     @Override
     protected void finished(final Description description) {
         System.out.println("finished");
+    }
+
+    @Attachment
+    public static byte[] getBytes(final String resourceName) throws IOException {
+        return Files.readAllBytes(Paths.get("src/test/screen", resourceName));
     }
 }
