@@ -20,9 +20,8 @@ import steps.BookAFlightStep;
 import steps.FlightConfirmationStep;
 import steps.FlightFinderStep;
 import steps.SelectFlightStep;
+import steps.SupportSteps;
 import steps.WelcomeStep;
-
-import static steps.SupportSteps.checkValuePage;
 
 
 import java.util.logging.Logger;
@@ -34,6 +33,7 @@ import java.util.logging.Logger;
 public class FirstTest {
 
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
+    @Steps
     private JDBC jdbc;
     @Rule
     public final MyRule myRule = new MyRule();
@@ -49,12 +49,14 @@ public class FirstTest {
     private BookAFlightStep bookAFlightStep;
     @Steps
     private FlightConfirmationStep flightConfirmationStep;
+    @Steps
+    private SupportSteps supportSteps;
 
     @Before
     public void setup() {
         System.setProperty("java.util.logging.config.file",
                 "src/main/resources/logging.properties");
-        jdbc = new JDBC();
+        //jdbc = new JDBC();
         driver.get("http://newtours.demoaut.com/");
     }
 
@@ -115,19 +117,19 @@ public class FirstTest {
 
     @Step("Проверка страницы SelectFlight")
     private void checkValueSelectFlightPage() {
-        checkValuePage(SelectFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(SelectFlightPage.PAGE_NAME,
                 "wayDepart",
                 jdbc.executeValue("wayDepart"),
                 selectFlightStep.getWayDepart());
-        checkValuePage(SelectFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(SelectFlightPage.PAGE_NAME,
                 "dateDepart",
                 jdbc.executeValue("dateDepart"),
                 selectFlightStep.getDateDepart());
-        checkValuePage(SelectFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(SelectFlightPage.PAGE_NAME,
                 "wayReturn",
                 jdbc.executeValue("wayReturn"),
                 selectFlightStep.getWayReturn());
-        checkValuePage(SelectFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(SelectFlightPage.PAGE_NAME,
                 "dateReturn",
                 jdbc.executeValue("dateReturn"),
                 selectFlightStep.getDateReturn());
@@ -143,49 +145,49 @@ public class FirstTest {
 
     @Step("Проверка страницы BookAFlight")
     private void checkValueBookAFlightPage() {
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "wayDepart",
                 jdbc.executeValue("wayDepart"),
                 bookAFlightStep.getWayDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "dateDepart",
-                jdbc.executeValue("dateDepart"),
+                jdbc.executeValue("dateDepart1"),
                 bookAFlightStep.getDateDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "flightDepart",
                 jdbc.executeValue("flightDepart"),
                 bookAFlightStep.getFlightDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "classDepart",
                 jdbc.executeValue("classDepart"),
                 bookAFlightStep.getClassDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "priceDepart",
                 Integer.parseInt(jdbc.executeValue("priceDepart")),
                 bookAFlightStep.getPriceDepart());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "wayReturn",
                 jdbc.executeValue("wayReturn"),
                 bookAFlightStep.getWayReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "dateReturn",
                 jdbc.executeValue("dateReturn"),
                 bookAFlightStep.getDateReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "flightReturn",
                 jdbc.executeValue("flightReturn"),
                 bookAFlightStep.getFlightReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "classReturn",
                 jdbc.executeValue("classReturn"),
                 bookAFlightStep.getClassReturn());
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "priceReturn",
                 Integer.parseInt(jdbc.executeValue("priceReturn")),
                 bookAFlightStep.getPriceReturn());
         int totalPrice = (bookAFlightStep.getPriceDepart() + bookAFlightStep.getPriceReturn())
                 * bookAFlightStep.getPassengers() + bookAFlightStep.getTaxes();
-        checkValuePage(BookAFlightPage.PAGE_NAME,
+        supportSteps.checkValuePage(BookAFlightPage.PAGE_NAME,
                 "priceTotal",
                 Integer.parseInt(jdbc.executeValue("priceTotal")),
                 totalPrice);
@@ -244,15 +246,15 @@ public class FirstTest {
     @Step("Проверка блока Depart страницы FlightConfirmation")
     private void checkDepartFlightConfirmationPage() {
         log.info("\nCheckDepart");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "wayDepart",
                 selectFlightStep.getWayDepart(),
                 flightConfirmationStep.getWayDepart());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "dateDepart",
                 selectFlightStep.getDateDepart(),
                 flightConfirmationStep.getDateDepart());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "flightDepart",
                 selectFlightStep.getFlightDepart(),
                 flightConfirmationStep.getFlightDepart());
@@ -261,15 +263,15 @@ public class FirstTest {
     @Step("Проверка блока Return страницы FlightConfirmation")
     private void checkReturnFlightConfirmationPage() {
         log.info("\nCheckReturn");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "wayReturn",
                 selectFlightStep.getWayReturn(),
                 flightConfirmationStep.getWayReturn());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "dateReturn",
                 selectFlightStep.getDateReturn(),
                 flightConfirmationStep.getDateReturn());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "flightReturn",
                 selectFlightStep.getFlightReturn(),
                 flightConfirmationStep.getFlightReturn());
@@ -278,7 +280,7 @@ public class FirstTest {
     @Step("Проверка блока CountPassengers страницы FlightConfirmation")
     private void checkCountPassengersFlightConfirmationPage() {
         log.info("\nCheckCountPassengers");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "countPassengers",
                 flightFinderStep.getCountPassengers(),
                 flightConfirmationStep.getCountPassengers());
@@ -287,23 +289,23 @@ public class FirstTest {
     @Step("Проверка блока BilledTo страницы FlightConfirmation")
     private void checkBilledToFlightConfirmationPage() {
         log.info("\nCheckBilledTo");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "billedToFullName",
                 bookAFlightStep.getBilledToFullName(),
                 flightConfirmationStep.getBilledToFullName());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "billedToAddress",
                 bookAFlightStep.getBilledToAddress(),
                 flightConfirmationStep.getBilledToAddress());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "billedToCity",
                 bookAFlightStep.getBilledToCity(),
                 flightConfirmationStep.getBilledToCity());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "billedToStateProvince",
                 bookAFlightStep.getBilledToStateProvince(),
                 flightConfirmationStep.getBilledToStateProvince());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "billedToStatePostalCode()",
                 bookAFlightStep.getBilledToPostalCode(),
                 flightConfirmationStep.getBilledToPostalCode());
@@ -312,19 +314,19 @@ public class FirstTest {
     @Step("Проверка блока Delivery страницы FlightConfirmation")
     private void checkDeliveryFlightConfirmationPage() {
         log.info("\nCheckDelivery");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "deliveryAddress",
                 bookAFlightStep.getDeliveryAddress(),
                 flightConfirmationStep.getDeliveryAddress());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "deliveryCity",
                 bookAFlightStep.getDeliveryCity(),
                 flightConfirmationStep.getDeliveryCity());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "deliveryStateProvince",
                 bookAFlightStep.getDeliveryStateProvince(),
                 flightConfirmationStep.getDeliveryStateProvince());
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "deliveryStatePostalCode",
                 bookAFlightStep.getDeliveryPostalCode(),
                 flightConfirmationStep.getDeliveryPostalCode());
@@ -333,7 +335,7 @@ public class FirstTest {
     @Step("Проверка блока TotalPrice страницы FlightConfirmation")
     private void checkTotalPriceFlightConfirmationPage() {
         log.info("\nCheckTotalPrice");
-        checkValuePage(FlightConfirmationPage.PAGE_NAME,
+        supportSteps.checkValuePage(FlightConfirmationPage.PAGE_NAME,
                 "totalPrice",
                 bookAFlightStep.getTotalPrice(),
                 (flightConfirmationStep.getPriceDepart() + flightConfirmationStep.getPriceReturn())
@@ -347,7 +349,8 @@ public class FirstTest {
             System.out.println("\nNEW PAGE  " + namePage);
             Assert.assertTrue(true);
         } else {
-            System.out.println("FAIL: Current page incorrect");
+            System.out.println("FAIL: Current page incorrect '"
+            + nameTitle + "' != '" + driver.getTitle() + "'");
             Assert.fail();
         }
     }

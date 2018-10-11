@@ -1,5 +1,8 @@
 package jdbc;
 
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.steps.ScenarioSteps;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * Класс для работы с базами данных.
  */
-public class JDBC {
+public class JDBC extends ScenarioSteps {
 
     private static Logger log = Logger.getLogger(JDBC.class.getName());
     private  Connection con;
@@ -26,6 +29,7 @@ public class JDBC {
      * @param name
      * @return
      */
+    @Step
     public String executeValue(final String name) {
         connect();
         PreparedStatement stmt = null;

@@ -2,6 +2,7 @@ package steps;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
+import org.junit.Assert;
 
 import java.util.logging.Logger;
 
@@ -12,8 +13,15 @@ public class SupportSteps extends ScenarioSteps {
 
     private static Logger log = Logger.getLogger(WelcomeStep.class.getName());
 
-    @Step
-    public static void checkValuePage(final String namePage,
+    /**
+     *
+     * @param namePage
+     * @param nameVariable
+     * @param expected
+     * @param actual
+     */
+    @Step("Проверка корректности значения {1} (expected: {2} / actual: {3})")
+    public void checkValuePage(final String namePage,
                                 final String nameVariable,
                                 final Object expected,
                                 final Object actual) {
@@ -31,7 +39,7 @@ public class SupportSteps extends ScenarioSteps {
         } else {
             log.info(String.format("INCORRECT!!! value Page: %s, name: %s \texpected = " + mark + ", actual = "
                     + mark, namePage, nameVariable, expected, actual));
-            // Assert.fail();
+             Assert.fail();
         }
     }
 }
